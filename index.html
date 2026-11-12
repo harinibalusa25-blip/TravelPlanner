@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobeTrek — Explore smarter, plan better, travel easier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <a href="#home" class="logo">🌍 Globe<span>Trek</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="active">Explore</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#itinerary">Itinerary Planner</a>
+      <a href="#budget">Budget Planner</a>
+      <a href="#saved">Saved Trips</a>
+      <a href="#guide">Travel Guide</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#saved" class="trips-btn">❤ <span id="tripCount">0</span> My Trips</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="badge">✈ Your next journey starts here</span>
+      <h1>Discover Your Next <span>Adventure</span></h1>
+      <p>Explore beautiful places, plan your perfect trip<br />and create unforgettable memories.</p>
+      <a href="#destinations" class="btn btn-primary">Explore Destinations</a>
+    </div>
+    <div class="trending-card">
+      <small>Trending</small>
+      <strong>Let's make your next adventure amazing!</strong>
+      <a href="#destinations" class="btn btn-small">Explore Now</a>
+    </div>
+  </section>
+
+  <!-- POPULAR + QUICK PLANNER -->
+  <section class="section" id="popular">
+    <div class="section-head">
+      <h2>Popular Destinations</h2>
+      <a href="#destinations" class="view-all">View all →</a>
+    </div>
+    <div class="popular-grid" id="popularGrid"></div>
+
+    <div class="quick-wrap">
+      <div class="card quick-plan">
+        <h3>Plan Your Itinerary</h3>
+        <label>Select Destination
+          <select id="qDest"></select>
+        </label>
+        <label>Number of Days
+          <select id="qDays">
+            <option value="3">3 Days</option>
+            <option value="5" selected>5 Days</option>
+            <option value="7">7 Days</option>
+            <option value="10">10 Days</option>
+          </select>
+        </label>
+        <label>Budget Range
+          <select id="qBudget">
+            <option value="budget">Budget ($500–$1000)</option>
+            <option value="mid">Mid-range ($1000–$3000)</option>
+            <option value="luxury">Luxury ($3000+)</option>
+          </select>
+        </label>
+        <button class="btn btn-primary full" id="qGenerate">Generate Itinerary</button>
+      </div>
+      <div class="card quick-budget">
+        <h3 id="qBudgetTitle">Budget Estimator (5 Days)</h3>
+        <div class="estimate-box">
+          <span>Total Estimate</span>
+          <strong id="qTotal">$1,000</strong>
+        </div>
+        <ul class="mini-breakdown" id="qBreakdown"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTINATIONS -->
+  <section class="section alt" id="destinations">
+    <div class="section-title">
+      <h2>Destinations</h2>
+      <p>Explore top destinations around the world</p>
+    </div>
+    <div class="filters">
+      <input type="text" id="searchBox" placeholder="🔍 Search destinations..." />
+      <select id="fRegion">
+        <option value="all">All Countries</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Americas">Americas</option>
+        <option value="Africa">Africa</option>
+        <option value="Oceania">Oceania</option>
+        <option value="Antarctica">Antarctica</option>
+      </select>
+      <select id="fCategory">
+        <option value="all">All Categories</option>
+        <option value="Beach">Beach</option>
+        <option value="Mountains">Mountains</option>
+        <option value="City">City</option>
+        <option value="Nature">Nature</option>
+        <option value="Culture">Culture</option>
+      </select>
+      <select id="fSort">
+        <option value="popular">Sort by: Popular</option>
+        <option value="rating">Sort by: Rating</option>
+        <option value="name">Sort by: Name</option>
+      </select>
+    </div>
+    <p class="count-line" id="destCount"></p>
+    <div class="dest-grid" id="destGrid"></div>
+    <p class="empty" id="destEmpty" hidden>No destinations match your filters.</p>
+    <div class="load-wrap"><button class="btn btn-primary" id="loadMore">Load more destinations</button></div>
+  </section>
+
+  <!-- ITINERARY PLANNER -->
+  <section class="section" id="itinerary">
+    <div class="section-title">
+      <h2>Itinerary Planner</h2>
+      <p>Plan your perfect trip</p>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <h3>Trip Details</h3>
+        <label>Destination <select id="iDest"></select></label>
+        <div class="row">
+          <label>Number of Days
+            <input type="number" id="iDays" min="1" max="21" value="5" />
+          </label>
+          <label>Travelers
+            <select id="iTrav">
+              <option value="1">Solo</option>
+              <option value="2" selected>2 Adults</option>
+              <option value="4">Family (4)</option>
+              <option value="6">Group (6+)</option>
+            </select>
+          </label>
+        </div>
+        <label>Budget Range
+          <select id="iBudget">
+            <option value="budget">Budget</option>
+            <option value="mid" selected>Medium</option>
+            <option value="luxury">Luxury</option>
+          </select>
+        </label>
+        <button class="btn btn-primary full" id="iGenerate">Generate Itinerary</button>
+      </div>
+      <div class="card result" id="iResult">
+        <p class="placeholder">Fill in the details and click Generate to see your personalized day-wise itinerary!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET PLANNER -->
+  <section class="section alt" id="budget">
+    <div class="section-title">
+      <h2>Budget Planner</h2>
+      <p>Plan your budget for the trip</p>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <h3>Trip Details</h3>
+        <label>Destination <select id="bDest"></select></label>
+        <div class="row">
+          <label>Number of Days
+            <select id="bDays">
+              <option value="3">3 Days</option>
+              <option value="5" selected>5 Days</option>
+              <option value="7">7 Days</option>
+              <option value="10">10 Days</option>
+              <option value="14">14 Days</option>
+            </select>
+          </label>
+          <label>Travelers
+            <select id="bTrav">
+              <option value="1">Solo</option>
+              <option value="2" selected>2 Adults</option>
+              <option value="4">Family (4)</option>
+              <option value="6">Group (6+)</option>
+            </select>
+          </label>
+        </div>
+        <div class="row">
+          <label>Budget Style
+            <select id="bStyle">
+              <option value="budget">Budget</option>
+              <option value="mid" selected>Mid-range</option>
+              <option value="luxury">Luxury</option>
+            </select>
+          </label>
+          <label>Currency
+            <select id="bCur">
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="INR">INR (₹)</option>
+              <option value="GBP">GBP (£)</option>
+            </select>
+          </label>
+        </div>
+        <button class="btn btn-primary full" id="bCalc">Calculate Budget</button>
+      </div>
+      <div class="card result" id="bResult">
+        <h3>Estimated Budget</h3>
+        <div class="estimate-box"><span>Total Estimate</span><strong id="bTotal">—</strong></div>
+        <ul class="breakdown" id="bBreakdown"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVED TRIPS -->
+  <section class="section" id="saved">
+    <div class="section-title">
+      <h2>Saved Trips</h2>
+      <p>Your saved trips and itineraries</p>
+    </div>
+    <div class="tabs" id="savedTabs">
+      <button class="tab active" data-tab="dest">Saved Destinations</button>
+      <button class="tab" data-tab="itin">Saved Itineraries</button>
+    </div>
+    <div id="savedDest" class="dest-grid"></div>
+    <div id="savedItin" class="saved-itins" hidden></div>
+  </section>
+
+  <!-- TRAVEL GUIDE -->
+  <section class="section alt" id="guide">
+    <div class="section-title">
+      <h2>Travel Guide</h2>
+      <p>Travel tips, guides and information</p>
+    </div>
+    <div class="tabs" id="guideTabs">
+      <button class="tab active" data-cat="all">All</button>
+      <button class="tab" data-cat="Tips">Tips</button>
+      <button class="tab" data-cat="Guides">Guides</button>
+      <button class="tab" data-cat="Packing">Packing</button>
+      <button class="tab" data-cat="Safety">Safety</button>
+      <button class="tab" data-cat="Culture">Culture</button>
+    </div>
+    <div class="guide-grid" id="guideGrid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <a href="#home" class="logo light">🌍 Globe<span>Trek</span></a>
+        <p>Explore smarter, plan better, travel easier.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#destinations">Destinations</a>
+        <a href="#itinerary">Itinerary Planner</a>
+        <a href="#budget">Budget Planner</a>
+      </div>
+      <div>
+        <h4>More</h4>
+        <a href="#saved">Saved Trips</a>
+        <a href="#guide">Travel Guide</a>
+      </div>
+    </div>
+    <p class="copy">© 2026 GlobeTrek. All rights reserved.</p>
+  </footer>
+
+  <!-- DETAIL MODAL -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="destinations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
